@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="myshop.sky.com.shop">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activity.Activity.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.Activity.Activity.Activity_Banner" />
+        <activity android:name=".Activity.Activity.Activity.Activity_Login" />
+        <activity android:name=".Activity.Activity.Activity.Activity_Register" />
+        <activity android:name=".Activity.Activity.Activity.Activity_Profile" />
+        <activity android:name=".Activity.Activity.Activity.Activity_EditProfile" />
+        <activity android:name=".Activity.Activity.Activity.Activity_category" />
+        <activity android:name=".Activity.Activity.Activity.Activity_Show" />
+        <activity android:name=".Activity.Activity.Activity.Activity_wait" />
+        <activity android:name=".Activity.Activity.Activity.Activity_basket" />
+        <activity android:name=".Activity.Activity.Activity.Activity_show_comment" />
+        <activity android:name=".Activity.Activity.Activity.Activity_send_comment" />
+        <activity android:name=".Activity.Activity.Activity.Activity_properties" />
+        <activity android:name=".Activity.Activity.Activity.Activity_Item_Category" />
+        <activity android:name=".Activity.Activity.Activity.Activty_item" />
+        <activity android:name=".Activity.Activity.Activity.Activity_Search"></activity>
+    </application>
+
+</manifest>
