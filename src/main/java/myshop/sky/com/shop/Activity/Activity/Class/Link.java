@@ -21,6 +21,10 @@ public class Link {
     public static final String linkGetProperties="http://newskylearn20.ir/getproperties.php";
     public static final String linkGetItemCategory="http://newskylearn20.ir/getcategory.php";
     public static final String linkGetItem="http://newskylearn20.ir/getitemcategory.php";
+    public static final String linkGetItemSearch="http://newskylearn20.ir/search.php?s=";
+    public static final String linkzarinurl="http://newskylearn20.ir/zarinpalrequest.php";
+    public static final String linksendBuy="http://newskylearn20.ir/sendbuydata.php";
+    public static final String linkDelteAllBasket="http://newskylearn20.ir/deletebasket.php";
 
 
 

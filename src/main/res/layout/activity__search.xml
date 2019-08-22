@@ -42,7 +42,8 @@ tools:context="myshop.sky.com.shop.Activity.Activity.Activity.Activity_Search">
     android:layout_margin="3dp"
     android:id="@+id/recysearch"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="wrap_content"/>
+
 
 </LinearLayout>
 

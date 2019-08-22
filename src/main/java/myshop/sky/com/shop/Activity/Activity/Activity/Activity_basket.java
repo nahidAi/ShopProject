@@ -1,6 +1,7 @@
 package myshop.sky.com.shop.Activity.Activity.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -66,6 +67,26 @@ public class Activity_basket extends AppCompatActivity
         textTotal = findViewById(R.id.textTotal);
         // textTotal.setText(totalallprice);
         textZarinpal = findViewById(R.id.textZarinpal);
+        textZarinpal.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (session.equals("ورود/عضویت")){
+                    Toast.makeText(Activity_basket.this, "شما وارد حساب کاربری خود نشده اید", Toast.LENGTH_SHORT).show();
+                }else  if (textTotal.getText().toString().equals("0 تومان")){
+                    Toast.makeText(Activity_basket.this, " شما محصولی برای خرید ندارید", Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(Activity_basket.this,Activity_webGat.class);
+                    intent.putExtra("total",totalallprice);
+                    intent.putExtra("desc",title);
+                    startActivity(intent);
+                    finish();
+
+                }
+
+            }
+        });
         recyclerView = findViewById(R.id.recyBasket);
         imageback = findViewById(R.id.imageBack);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));

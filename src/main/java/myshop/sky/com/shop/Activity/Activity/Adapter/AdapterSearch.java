@@ -52,7 +52,6 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.viewHolder
         final ModelSearch item = modelSearches.get(i);
         viewHolder.textfreeprice.setVisibility(View.GONE);
         viewHolder.texttitle.setText(item.getTitle());
-        ;
         viewHolder.textprice.setText(item.getPrice() + " " + "تومان");
 
 
