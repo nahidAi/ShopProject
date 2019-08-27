@@ -72,14 +72,17 @@ public class Activity_basket extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                if (session.equals("ورود/عضویت")){
+                if (session.equals("ورود/عضویت"))
+                {
                     Toast.makeText(Activity_basket.this, "شما وارد حساب کاربری خود نشده اید", Toast.LENGTH_SHORT).show();
-                }else  if (textTotal.getText().toString().equals("0 تومان")){
+                } else if (textTotal.getText().toString().equals("0 تومان"))
+                {
                     Toast.makeText(Activity_basket.this, " شما محصولی برای خرید ندارید", Toast.LENGTH_SHORT).show();
-                }else {
-                    Intent intent = new Intent(Activity_basket.this,Activity_webGat.class);
-                    intent.putExtra("total",totalallprice);
-                    intent.putExtra("desc",title);
+                } else
+                {
+                    Intent intent = new Intent(Activity_basket.this, Activity_webGat.class);
+                    intent.putExtra("total", totalallprice);
+                    intent.putExtra("desc", title);
                     startActivity(intent);
                     finish();
 
@@ -148,7 +151,7 @@ public class Activity_basket extends AppCompatActivity
                         adapterBasket.notifyDataSetChanged();
                         totalallprice += Integer.parseInt(allprice);
                         nm += Integer.parseInt(number);
-                       // Toast.makeText(Activity_basket.this, "total price is : " + totalallprice + "", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(Activity_basket.this, "total price is : " + totalallprice + "", Toast.LENGTH_SHORT).show();
 
 
                     }

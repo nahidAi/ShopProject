@@ -35,7 +35,8 @@
         <activity android:name=".Activity.Activity.Activity.Activty_item" />
         <activity android:name=".Activity.Activity.Activity.Activity_Search" />
         <activity android:name=".Activity.Activity.Activity.Activity_webGat" />
-        <activity android:name=".Activity.Activity.Activity.Activity_FinalBuy"></activity>
+        <activity android:name=".Activity.Activity.Activity.Activity_FinalBuy" />
+        <activity android:name=".Activity.Activity.Activity.Activity_Favorit"></activity>
     </application>
 
 </manifest>

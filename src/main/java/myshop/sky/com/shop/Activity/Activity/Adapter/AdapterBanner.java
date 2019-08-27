@@ -10,12 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import myshop.sky.com.shop.Activity.Activity.Activity.Activity_Banner;
+import myshop.sky.com.shop.Activity.Activity.Class.put;
 import myshop.sky.com.shop.Activity.Activity.Model.ModelBanner;
 import myshop.sky.com.shop.R;
 
@@ -50,10 +52,10 @@ public class AdapterBanner extends RecyclerView.Adapter<AdapterBanner.viewHolder
 
                 Intent intent = new Intent(AdapterBanner.this.context,Activity_Banner.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("banner",banner.getId()+"");
+                intent.putExtra(put.id,banner.getId()+"");
                 //intent.putExtra(put.freeprice,"");
                 context.startActivity(intent);
-                //Toast.makeText(context, banner.getId()+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, banner.getId()+"", Toast.LENGTH_SHORT).show();
             }
         });
     }

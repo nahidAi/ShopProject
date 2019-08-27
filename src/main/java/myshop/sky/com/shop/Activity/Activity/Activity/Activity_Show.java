@@ -2,8 +2,10 @@ package myshop.sky.com.shop.Activity.Activity.Activity;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -35,23 +37,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import myshop.sky.com.shop.Activity.Activity.Class.DbSqlite;
 import myshop.sky.com.shop.Activity.Activity.Class.Link;
 import myshop.sky.com.shop.Activity.Activity.Class.MySingleton;
 import myshop.sky.com.shop.Activity.Activity.Class.put;
+import myshop.sky.com.shop.Activity.Activity.Model.ModelFav;
 import myshop.sky.com.shop.R;
 
 public class Activity_Show extends AppCompatActivity
 {
     SliderLayout sliderLayout;
-    ImageView imageback, imagebacket;
+    ImageView imageback, imagebacket, imagefavorite;
     AppBarLayout appBarLayout;
     ArrayList<String> strings = new ArrayList<>();
     String id, label, freePrice;
     TextView titleShow, textColr, garanty, textprice, nexttext, description, textCountbasket, textFree, textrating;
     CardView basket, comment, cardPr;
     boolean b = true;
+    Context context = this;
+    private boolean bf = true;
+    DbSqlite sqlite = new DbSqlite(context);
     String session;
-    String titleS, colorS, garantyS, priceS, imageS;
+    String titleS, colorS, garantyS, priceS, imageS, cat, visit;
     ScaleRatingBar scaleRatingBar;
     int ratingbar;
 
@@ -73,11 +80,28 @@ public class Activity_Show extends AppCompatActivity
 
         findView();
 
+//برای اینکه قبل از هر چیز فیوریت رو چک کنه  و اگه همچی ایدیی بود رنگ ستاره رو قرمز کنه این کدها روو مینویسیم
+        Cursor cursor = sqlite.cu(Integer.parseInt(id));
+
+        if (cursor.getCount() == 1)
+        {
+            imagefavorite.setColorFilter(getApplicationContext().getResources().getColor(R.color.red));
+            imagefavorite.setImageResource(R.drawable.ic_star_black_24dp);
+            bf = false;
+        } else
+        {
+            imagefavorite.setColorFilter(getApplicationContext().getResources().getColor(R.color.gray));
+            imagefavorite.setImageResource(R.drawable.ic_star_border_black_24dp);
+            bf = true;
+        }
+        ////////////////////////////////////////////
+
 
     }
 
     private void findView()
     {
+        imagefavorite = findViewById(R.id.imageFavorite);
         Typeface typeface = Typeface.createFromAsset(getAssets(), "Vazir-Medium-FD-WOL.ttf");
         textFree = findViewById(R.id.textPriceShowfree);
         textFree.setVisibility(View.GONE);
@@ -101,12 +125,12 @@ public class Activity_Show extends AppCompatActivity
         String rat = getIntent().getStringExtra(put.rating);
 
         int r = rat.length();
-        if (r==1)
+        if (r == 1)
         {
-            rat =rat+"."+"0";
-        }
-        else {
-            rat = rat.substring(0,3);
+            rat = rat + "." + "0";
+        } else
+        {
+            rat = rat.substring(0, 3);
         }
 //        rat = rat.s);
         textrating.setText(rat + " " + "از" + " " + "5");
@@ -179,6 +203,40 @@ public class Activity_Show extends AppCompatActivity
 
     private void onClick()
     {
+        imagefavorite.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (bf)
+                {
+                    if (!freePrice.equals(""))
+                    {
+                        sqlite.insertFav(new ModelFav(Integer.parseInt(id), imageS, titleS, visit, freePrice, priceS, label));
+                        imagefavorite.setImageResource(R.drawable.ic_star_black_24dp);
+                        imagefavorite.setColorFilter(getApplicationContext().getResources().getColor(R.color.red));
+                        Toast.makeText(context, "به لیست علاقه مندی ها اضافه شد", Toast.LENGTH_SHORT).show();
+                        bf = false;
+                    } else
+                    {
+                        sqlite.insertFav(new ModelFav(Integer.parseInt(id), imageS, titleS, visit, priceS, priceS, label));
+                        imagefavorite.setImageResource(R.drawable.ic_star_black_24dp);
+                        imagefavorite.setColorFilter(getApplicationContext().getResources().getColor(R.color.red));
+                        Toast.makeText(context, "به لیست علاقه مندی ها اضافه شد", Toast.LENGTH_SHORT).show();
+                        bf = false;
+                    }
+
+                } else
+                {
+                    sqlite.deleteFav(Integer.parseInt(id));
+                    imagefavorite.setImageResource(R.drawable.ic_star_border_black_24dp);
+                    imagefavorite.setColorFilter(getApplicationContext().getResources().getColor(R.color.gray));
+                    Toast.makeText(context, "از لیست علاقه مندی ها حذف شد", Toast.LENGTH_SHORT).show();
+                    bf = true;
+                }
+
+            }
+        });
         cardPr.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -232,9 +290,11 @@ public class Activity_Show extends AppCompatActivity
                     Toast.makeText(Activity_Show.this, "شما وارد حساب کاربری خود نشده اید", Toast.LENGTH_SHORT).show();
                 } else
                 {
-                    if (!freePrice.equals("")){
+                    if (!freePrice.equals(""))
+                    {
                         sendBasket(id, session, titleS, colorS, imageS, garantyS, freePrice);
-                    }else {
+                    } else
+                    {
                         sendBasket(id, session, titleS, colorS, imageS, garantyS, priceS);
                     }
 
@@ -362,6 +422,12 @@ public class Activity_Show extends AppCompatActivity
 
     public void setIntent()
     {
+
+        cat = getIntent().getStringExtra(put.cat);
+        visit = getIntent().getStringExtra(put.visit);
+        label = getIntent().getStringExtra(put.label);
+
+
         titleShow.setText(titleS);
         textColr.setText(colorS);
         garanty.setText(garantyS);

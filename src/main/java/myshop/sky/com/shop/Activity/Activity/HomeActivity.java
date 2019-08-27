@@ -39,6 +39,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import myshop.sky.com.shop.Activity.Activity.Activity.Activity_Favorit;
 import myshop.sky.com.shop.Activity.Activity.Activity.Activity_Login;
 import myshop.sky.com.shop.Activity.Activity.Activity.Activity_Profile;
 import myshop.sky.com.shop.Activity.Activity.Activity.Activity_Search;
@@ -68,7 +69,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
     AdapterOnly adapterOnly;
     List<ModelOnly> modelOnlies = new ArrayList<>();
     AdapterBanner adapterBanner;
-    List<ModelBanner> modelBanners = new ArrayList<>();
+    List<ModelBanner> modelBannerList = new ArrayList<>();
     AdaperVisite adapterVisit;
     List<Modelvisit> visits = new ArrayList<>();
     AdapterSales adapterSales;
@@ -80,6 +81,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
     String session;
     CircleImageView circleImageView;
     String imageUser;
+    LinearLayout lnrFav;
 
 
     @Override
@@ -113,6 +115,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
     public void findView()
     {
+        lnrFav = findViewById(R.id.lnrFav);
         imageSearch = findViewById(R.id.imagesearch);
         circleImageView = findViewById(R.id.circleImageUser);
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
@@ -134,11 +137,21 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
         getsaleProduct();
         installSliderLayout();
         setUpRecyclerview();
+        getbannerData();
 
     }
 
     public void onClick()
     {
+        lnrFav.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(new Intent(HomeActivity.this, Activity_Favorit.class));
+               // overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
         imageSearch.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -306,13 +319,15 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
         modelBestSales.add(new ModelBestSales(3, "http://uupload.ir/files/eid_s7.png", "گوشی سامسونگ", "43", "676767"));
         modelBestSales.add(new ModelBestSales(4, "http://uupload.ir/files/eid_s7.png", "گوشی سامسونگ", "43", "676767"));*/
 //
-        adapterBanner = new AdapterBanner(getApplicationContext(), modelBanners);
+        adapterBanner = new AdapterBanner(getApplicationContext(), modelBannerList);
         recyBanner.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         recyBanner.setAdapter(adapterBanner);
-        modelBanners.add(new ModelBanner(1, "http://uupload.ir/files/eid_s7.png"));
-        modelBanners.add(new ModelBanner(2, "http://uupload.ir/files/eid_s7.png"));
-        modelBanners.add(new ModelBanner(3, "http://uupload.ir/files/eid_s7.png"));
-        modelBanners.add(new ModelBanner(4, "http://uupload.ir/files/eid_s7.png"));
+
+
+       /* modelBannerList.add(new ModelBanner(1, "http://uupload.ir/files/eid_s7.png"));
+        modelBannerList.add(new ModelBanner(2, "http://uupload.ir/files/eid_s7.png"));
+        modelBannerList.add(new ModelBanner(3, "http://uupload.ir/files/eid_s7.png"));
+        modelBannerList.add(new ModelBanner(4, "http://uupload.ir/files/eid_s7.png"));*/
 
 
     }
@@ -482,6 +497,46 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
     }
 
+    private void getbannerData()
+    {
+        String url = Link.linkbannerData;
+        final ProgressDialog progressDialog = new ProgressDialog(HomeActivity.this);
+        progressDialog.setMessage(" در حال دریافت اطلاعات");
+        progressDialog.show();
+
+        Response.Listener<JSONArray> listener = new Response.Listener<JSONArray>()
+        {
+            @Override
+            public void onResponse(JSONArray response)
+            {
+                Gson gson = new Gson();
+                ModelBanner[] modelBanners = gson.fromJson(response.toString(), ModelBanner[].class);
+                for (int i = 0; i < modelBanners.length; i++)
+                {
+                    modelBannerList.add(modelBanners[i]);
+                    adapterVisit.notifyDataSetChanged();
+
+                }
+                progressDialog.dismiss();
+
+
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener()
+        {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                Toast.makeText(HomeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
+            }
+        };
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, listener, errorListener);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+
+    }
     private void getsaleProduct()
     {
         String url = Link.linksaleProduct;
