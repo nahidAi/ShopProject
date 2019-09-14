@@ -8,19 +8,19 @@ public class ModelFree {
     String title;
     String visit;
     String price;
-    String lable;
+    String label;
     String freeprice;
     float finalrating;
 
 
-    public ModelFree(int id, String image, String title, String visit, String price, String lable, String freeprice, float finalrating)
+    public ModelFree(int id, String image, String title, String visit, String price, String label, String freeprice, float finalrating)
     {
         this.id = id;
         this.image = image;
         this.title = title;
         this.visit = visit;
         this.price = price;
-        this.lable = lable;
+        this.label = label;
         this.freeprice = freeprice;
         this.finalrating = finalrating;
     }
@@ -44,11 +44,11 @@ public class ModelFree {
     }
 
     public String getLable() {
-        return lable;
+        return label;
     }
 
     public void setLable(String lable) {
-        this.lable = lable;
+        this.label = lable;
     }
 
     public int getId() {

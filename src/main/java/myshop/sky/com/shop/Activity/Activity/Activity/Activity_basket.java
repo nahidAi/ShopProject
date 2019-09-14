@@ -1,6 +1,7 @@
 package myshop.sky.com.shop.Activity.Activity.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -35,6 +36,7 @@ import myshop.sky.com.shop.Activity.Activity.Class.put;
 import myshop.sky.com.shop.Activity.Activity.Model.ModelBasket;
 import myshop.sky.com.shop.Activity.Activity.OnloadPrice;
 import myshop.sky.com.shop.R;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Activity_basket extends AppCompatActivity
 {
@@ -83,6 +85,7 @@ public class Activity_basket extends AppCompatActivity
                     Intent intent = new Intent(Activity_basket.this, Activity_webGat.class);
                     intent.putExtra("total", totalallprice);
                     intent.putExtra("desc", title);
+                    intent.putExtra(put.number,number);
                     startActivity(intent);
                     finish();
 
@@ -132,7 +135,6 @@ public class Activity_basket extends AppCompatActivity
             @Override
             public void onResponse(String response)
             {
-                // Toast.makeText(Activity_basket.this, response.toString(), Toast.LENGTH_SHORT).show();
                 try
                 {
                     JSONArray jsonArray = new JSONArray(response);
@@ -193,5 +195,14 @@ public class Activity_basket extends AppCompatActivity
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
-
+    @Override
+    public void finish()
+    {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 }

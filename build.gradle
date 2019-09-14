@@ -37,4 +37,7 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.github.ome450901:SimpleRatingBar:1.4.2'
+    implementation 'com.github.medyo:android-about-page:1.2.5'
+    implementation 'com.facebook.shimmer:shimmer:0.4.0'
+    compile 'uk.co.chrisjenx:calligraphy:2.3.0'
 }

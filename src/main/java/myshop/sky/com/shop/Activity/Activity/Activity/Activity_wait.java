@@ -56,11 +56,12 @@ public class Activity_wait extends AppCompatActivity
         Response.Listener<String> listener = new Response.Listener<String>()
         {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(String response)
+            {
 
                 try
                 {
-                   JSONArray jsonArray = new JSONArray(response);
+                    JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0; i < jsonArray.length(); i++)
                     {
 
@@ -75,16 +76,16 @@ public class Activity_wait extends AppCompatActivity
                         only = object.getString("only");
                         sale = object.getString("sale");
                         color = object.getString("color");
+                        cat = object.getString("cat");
                         garanty = object.getString("garanty");
                         description = object.getString("description");
                         ratingbar = object.getString("finalrating");
                         float f = Float.parseFloat(ratingbar);
                         Toast.makeText(Activity_wait.this, String.valueOf(ratingbar), Toast.LENGTH_LONG).show();
-                       // Toast.makeText(Activity_wait.this, id, Toast.LENGTH_LONG).show();
+                        // Toast.makeText(Activity_wait.this, id, Toast.LENGTH_LONG).show();
 
                     }
-                }
-                catch (Exception e)
+                } catch (Exception e)
                 {
                     e.printStackTrace();
 
@@ -95,6 +96,7 @@ public class Activity_wait extends AppCompatActivity
                 intent.putExtra(put.title, title);
                 intent.putExtra(put.description, description);
                 intent.putExtra(put.image, image);
+                intent.putExtra(put.cat, cat);
                 intent.putExtra(put.visit, visit);
                 intent.putExtra(put.price, price);
                 intent.putExtra(put.label, label);

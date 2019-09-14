@@ -50,7 +50,7 @@ public class Activity_webGat extends AppCompatActivity
         session = preferences.getString(put.email, "ورود/عضویت");
         totalprice = String.valueOf(getIntent().getIntExtra("total",0));
         description = getIntent().getStringExtra("desc");
-        number =String.valueOf( getIntent().getIntExtra(put.number,0));
+        number =getIntent().getStringExtra(put.number);
 
         webView = findViewById(R.id.zarinpalWebView);
         webView.getSettings().setJavaScriptEnabled(true);

@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +34,33 @@ public class Activity_Favorit extends AppCompatActivity
        modelFavs = dbSqlite.showData();
 
         recyclerView = findViewById(R.id.recyfav);
+       /* adapterFav = new Adapter_fav(getApplicationContext(), modelFavs);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setAdapter(adapterFav);
+        recyclerView.hasFixedSize();*/
+        imageback = findViewById(R.id.imageBack);
+        imageback.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void finish()
+    {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        modelFavs = dbSqlite.showData();
         adapterFav = new Adapter_fav(getApplicationContext(), modelFavs);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(adapterFav);

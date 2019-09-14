@@ -13,9 +13,12 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +30,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.google.gson.Gson;
 import com.willy.ratingbar.ScaleRatingBar;
 
 import org.json.JSONArray;
@@ -35,22 +39,30 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import myshop.sky.com.shop.Activity.Activity.Adapter.AdapterLike;
 import myshop.sky.com.shop.Activity.Activity.Class.DbSqlite;
 import myshop.sky.com.shop.Activity.Activity.Class.Link;
 import myshop.sky.com.shop.Activity.Activity.Class.MySingleton;
 import myshop.sky.com.shop.Activity.Activity.Class.put;
 import myshop.sky.com.shop.Activity.Activity.Model.ModelFav;
+import myshop.sky.com.shop.Activity.Activity.Model.ModelLike;
 import myshop.sky.com.shop.R;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Activity_Show extends AppCompatActivity
 {
+    RecyclerView recyLike;
+    AdapterLike adapterLike;
+    List<ModelLike> modelLikeList = new ArrayList<>();
     SliderLayout sliderLayout;
     ImageView imageback, imagebacket, imagefavorite;
     AppBarLayout appBarLayout;
     ArrayList<String> strings = new ArrayList<>();
     String id, label, freePrice;
+    TextView textlike;
     TextView titleShow, textColr, garanty, textprice, nexttext, description, textCountbasket, textFree, textrating;
     CardView basket, comment, cardPr;
     boolean b = true;
@@ -101,6 +113,8 @@ public class Activity_Show extends AppCompatActivity
 
     private void findView()
     {
+        textlike = findViewById(R.id.textlike);
+        recyLike = findViewById(R.id.recyLike);
         imagefavorite = findViewById(R.id.imageFavorite);
         Typeface typeface = Typeface.createFromAsset(getAssets(), "Vazir-Medium-FD-WOL.ttf");
         textFree = findViewById(R.id.textPriceShowfree);
@@ -199,10 +213,17 @@ public class Activity_Show extends AppCompatActivity
         getSilder(id);
         setIntent();
         onClick();
+        getLikeProduct();
     }
 
     private void onClick()
     {
+        imageback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         imagefavorite.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -419,6 +440,27 @@ public class Activity_Show extends AppCompatActivity
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
+    private void getLikeProduct() {
+        adapterLike = new AdapterLike(getApplicationContext(), modelLikeList);
+        recyLike.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayout.HORIZONTAL, false));
+        recyLike.setAdapter(adapterLike);
+        recyLike.hasFixedSize();
+
+
+        if (cat.equals("0"))
+        {
+            recyLike.setVisibility(View.GONE);
+            textlike.setText("محصول مشابهی یافت نشد");
+        }
+        else
+        {
+            sendlikeproduct(cat);
+
+        }
+
+
+    }
+
 
     public void setIntent()
     {
@@ -487,6 +529,57 @@ public class Activity_Show extends AppCompatActivity
         };
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
 
+    }
+    private void sendlikeproduct(final String cat) {
+
+        String url = Link.linkLike;
+        final ProgressDialog progressDialog = new ProgressDialog(Activity_Show.this);
+        progressDialog.show();
+
+        Response.Listener<String> listener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+
+                Gson gson = new Gson();
+                ModelLike[] likes = gson.fromJson(response.toString(), ModelLike[].class);
+                for (int i = 0; i < likes.length; i++) {
+                    modelLikeList.add(likes[i]);
+                    adapterLike.notifyDataSetChanged();
+
+                }
+
+                progressDialog.dismiss();
+
+            }
+        };
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(Activity_Show.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        };
+
+        StringRequest request = new StringRequest(Request.Method.POST, url, listener, errorListener) {
+
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                HashMap<String, String> map = new HashMap<>();
+                map.put(put.cat, cat);
+                return map;
+            }
+        };
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+
+
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
 

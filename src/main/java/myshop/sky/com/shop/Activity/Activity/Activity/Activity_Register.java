@@ -2,6 +2,7 @@ package myshop.sky.com.shop.Activity.Activity.Activity;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import myshop.sky.com.shop.Activity.Activity.Class.MySingleton;
 import myshop.sky.com.shop.Activity.Activity.Class.put;
 import myshop.sky.com.shop.Activity.Activity.Class.RuntimePermissionsActivity;
 import myshop.sky.com.shop.R;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Activity_Register extends RuntimePermissionsActivity
 {
@@ -191,5 +193,9 @@ public class Activity_Register extends RuntimePermissionsActivity
             imagencode = ImageGallery.getStringImage(bitmap, 300);
             circleImageView.setImageBitmap(bitmap);
         }
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

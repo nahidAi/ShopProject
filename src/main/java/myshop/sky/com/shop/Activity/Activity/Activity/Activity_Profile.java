@@ -1,5 +1,6 @@
 package myshop.sky.com.shop.Activity.Activity.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import myshop.sky.com.shop.Activity.Activity.Class.put;
 import myshop.sky.com.shop.R;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Activity_Profile extends AppCompatActivity
 {
@@ -86,5 +88,9 @@ public class Activity_Profile extends AppCompatActivity
                 startActivity(new Intent(Activity_Profile.this, Activity_EditProfile.class));
             }
         });
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

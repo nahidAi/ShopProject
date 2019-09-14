@@ -1,6 +1,7 @@
 package myshop.sky.com.shop.Activity.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.widget.DrawerLayout;
@@ -43,8 +44,10 @@ import myshop.sky.com.shop.Activity.Activity.Activity.Activity_Favorit;
 import myshop.sky.com.shop.Activity.Activity.Activity.Activity_Login;
 import myshop.sky.com.shop.Activity.Activity.Activity.Activity_Profile;
 import myshop.sky.com.shop.Activity.Activity.Activity.Activity_Search;
+import myshop.sky.com.shop.Activity.Activity.Activity.Activity_about;
 import myshop.sky.com.shop.Activity.Activity.Activity.Activity_basket;
 import myshop.sky.com.shop.Activity.Activity.Activity.Activity_category;
+import myshop.sky.com.shop.Activity.Activity.Activity.Activity_order;
 import myshop.sky.com.shop.Activity.Activity.Adapter.AdaperVisite;
 import myshop.sky.com.shop.Activity.Activity.Adapter.AdapterBanner;
 import myshop.sky.com.shop.Activity.Activity.Adapter.AdapterFree;
@@ -59,6 +62,7 @@ import myshop.sky.com.shop.Activity.Activity.Model.ModelFree;
 import myshop.sky.com.shop.Activity.Activity.Model.ModelOnly;
 import myshop.sky.com.shop.Activity.Activity.Model.Modelvisit;
 import myshop.sky.com.shop.R;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class HomeActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener
 {
@@ -74,14 +78,14 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
     List<Modelvisit> visits = new ArrayList<>();
     AdapterSales adapterSales;
     List<ModelBestSales> modelBestSales = new ArrayList<>();
-    ImageView imageNav, imagebasketHome,imageSearch;
+    ImageView imageNav, imagebasketHome, imageSearch;
     DrawerLayout drawerLayout;
     TextView txtLogin, textCount;
     CardView cardCategory;
     String session;
     CircleImageView circleImageView;
     String imageUser;
-    LinearLayout lnrFav;
+    LinearLayout lnrFav, lnrbuy,lnrabout,lnrcategory;
 
 
     @Override
@@ -97,12 +101,14 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
         session = preferences.getString(put.email, "عضویت و ورود");
 
         imageUser = preferences.getString(put.image, "");
-        if (imageUser.equals("")) {
+        if (imageUser.equals(""))
+        {
             Picasso
                     .with(getApplicationContext())
                     .load(R.drawable.userprofile)
                     .into(circleImageView);
-        } else {
+        } else
+        {
             Picasso
                     .with(getApplicationContext())
                     .load(imageUser)
@@ -115,6 +121,9 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
     public void findView()
     {
+        lnrcategory = findViewById(R.id.lnrCtegory);
+        lnrabout = findViewById(R.id.lnrabout);
+        lnrbuy = findViewById(R.id.lnrbuy);
         lnrFav = findViewById(R.id.lnrFav);
         imageSearch = findViewById(R.id.imagesearch);
         circleImageView = findViewById(R.id.circleImageUser);
@@ -143,13 +152,46 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
     public void onClick()
     {
+        lnrcategory.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(new Intent(HomeActivity.this,Activity_category.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+            }
+        });
+        lnrabout.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(HomeActivity.this, Activity_about.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+            }
+        });
+        lnrbuy.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(HomeActivity.this, Activity_order.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+
+            }
+        });
         lnrFav.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 startActivity(new Intent(HomeActivity.this, Activity_Favorit.class));
-               // overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         imageSearch.setOnClickListener(new View.OnClickListener()
@@ -159,6 +201,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
             {
                 Intent intent = new Intent(HomeActivity.this, Activity_Search.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         imageNav.setOnClickListener(new View.OnClickListener()
@@ -185,6 +228,8 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
                 {
                     Intent intent = new Intent(HomeActivity.this, Activity_Profile.class);
                     startActivityForResult(intent, put.REQUEST_EXITE);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
 
                 }
 
@@ -197,6 +242,8 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
             public void onClick(View v)
             {
                 startActivity(new Intent(HomeActivity.this, Activity_category.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
             }
         });
         imagebasketHome.setOnClickListener(new View.OnClickListener()
@@ -205,6 +252,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
             public void onClick(View v)
             {
                 startActivity(new Intent(HomeActivity.this, Activity_basket.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }
@@ -348,7 +396,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(put.email, email);
             editor.putString(put.image, image);
-           // Toast.makeText(this,"link url is ..."+ image, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this,"link url is ..."+ image, Toast.LENGTH_SHORT).show();
             editor.commit();
             recreate();
 
@@ -356,11 +404,13 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
         {
             String email = data.getStringExtra(put.email);
             String image = data.getStringExtra(put.image);
-            if (image.equals("")) {
+            if (image.equals(""))
+            {
                 Picasso.with(getApplicationContext())
                         .load(R.drawable.userprofile)
                         .into(circleImageView);
-            } else {
+            } else
+            {
                 Picasso
                         .with(getApplicationContext())
                         .load(image)
@@ -386,6 +436,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
             @Override
             public void onResponse(JSONArray response)
             {
+
                 Gson gson = new Gson();
                 ModelFree[] frees = gson.fromJson(response.toString(), ModelFree[].class);
                 for (int i = 0; i < frees.length; i++)
@@ -537,6 +588,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
 
     }
+
     private void getsaleProduct()
     {
         String url = Link.linksaleProduct;
@@ -620,5 +672,9 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
     {
         super.onStart();
         getCount(session);
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

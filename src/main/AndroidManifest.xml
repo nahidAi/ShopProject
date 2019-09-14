@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".Activity.Activity.Class.G"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -32,11 +33,13 @@
         <activity android:name=".Activity.Activity.Activity.Activity_send_comment" />
         <activity android:name=".Activity.Activity.Activity.Activity_properties" />
         <activity android:name=".Activity.Activity.Activity.Activity_Item_Category" />
-        <activity android:name=".Activity.Activity.Activity.Activty_item" />
+        <activity android:name=".Activity.Activity.Activity.Activity_Item" />
         <activity android:name=".Activity.Activity.Activity.Activity_Search" />
         <activity android:name=".Activity.Activity.Activity.Activity_webGat" />
         <activity android:name=".Activity.Activity.Activity.Activity_FinalBuy" />
-        <activity android:name=".Activity.Activity.Activity.Activity_Favorit"></activity>
+        <activity android:name=".Activity.Activity.Activity.Activity_Favorit" />
+        <activity android:name=".Activity.Activity.Activity.Activity_order" />
+        <activity android:name=".Activity.Activity.Activity.Activity_about"></activity>
     </application>
 
 </manifest>

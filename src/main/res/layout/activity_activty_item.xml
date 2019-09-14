@@ -7,7 +7,7 @@
     android:background="#e4e4e4"
     android:layoutDirection="rtl"
     android:orientation="vertical"
-    tools:context="myshop.sky.com.shop.Activity.Activity.Activity.Activty_item">
+    tools:context="myshop.sky.com.shop.Activity.Activity.Activity.Activity_Item">
 
 
     <include layout="@layout/toolbar2" />
@@ -44,7 +44,5 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyitem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        />
+        android:layout_height="match_parent" />
 </LinearLayout>

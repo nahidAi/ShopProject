@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import myshop.sky.com.shop.Activity.Activity.Activity.Activty_item;
+import myshop.sky.com.shop.Activity.Activity.Activity.Activity_Item;
 import myshop.sky.com.shop.Activity.Activity.Class.put;
 import myshop.sky.com.shop.Activity.Activity.Model.ModelItemCategory;
 import myshop.sky.com.shop.R;
@@ -53,7 +53,7 @@ public class AdapterItemCategory extends RecyclerView.Adapter<AdapterItemCategor
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(AdapterItemCategory.this.context, Activty_item.class);
+                Intent intent = new Intent(AdapterItemCategory.this.context, Activity_Item.class);
                 intent.putExtra(put.id, category.getId() + "");
                 intent.putExtra(put.title, category.getTitle());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

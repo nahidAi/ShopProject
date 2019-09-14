@@ -1,6 +1,7 @@
 package myshop.sky.com.shop.Activity.Activity.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -27,6 +28,7 @@ import myshop.sky.com.shop.Activity.Activity.Class.Link;
 import myshop.sky.com.shop.Activity.Activity.Class.MySingleton;
 import myshop.sky.com.shop.Activity.Activity.Model.ModelCategory;
 import myshop.sky.com.shop.R;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Activity_category extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -96,5 +98,15 @@ public class Activity_category extends AppCompatActivity {
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,url,null,listener,errorListener);
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
 
+    }
+    @Override
+    public void finish()
+    {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

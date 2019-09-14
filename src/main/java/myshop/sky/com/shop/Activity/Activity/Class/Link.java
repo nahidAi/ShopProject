@@ -27,6 +27,9 @@ public class Link {
     public static final String linkDelteAllBasket="http://newskylearn20.ir/deletebasket.php";
     public static final String linkbannerData="http://newskylearn20.ir/bannerdata.php";
     public static final String linkGetBannerItem="http://newskylearn20.ir/banneritem.php";
+    public static final String linkGetOrder="http://newskylearn20.ir/getbuy.php";
+    public static final String linkLike="http://newskylearn20.ir/likeproduct.php";
+    public static final String linkfilter="http://newskylearn20.ir/filter.php";
 
 
 
