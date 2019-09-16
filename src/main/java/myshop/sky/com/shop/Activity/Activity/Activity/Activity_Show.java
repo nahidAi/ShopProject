@@ -52,8 +52,7 @@ import myshop.sky.com.shop.Activity.Activity.Model.ModelLike;
 import myshop.sky.com.shop.R;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class Activity_Show extends AppCompatActivity
-{
+public class Activity_Show extends AppCompatActivity {
     RecyclerView recyLike;
     AdapterLike adapterLike;
     List<ModelLike> modelLikeList = new ArrayList<>();
@@ -76,8 +75,7 @@ public class Activity_Show extends AppCompatActivity
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
         id = getIntent().getStringExtra(put.id);
@@ -95,13 +93,11 @@ public class Activity_Show extends AppCompatActivity
 //برای اینکه قبل از هر چیز فیوریت رو چک کنه  و اگه همچی ایدیی بود رنگ ستاره رو قرمز کنه این کدها روو مینویسیم
         Cursor cursor = sqlite.cu(Integer.parseInt(id));
 
-        if (cursor.getCount() == 1)
-        {
+        if (cursor.getCount() == 1) {
             imagefavorite.setColorFilter(getApplicationContext().getResources().getColor(R.color.red));
             imagefavorite.setImageResource(R.drawable.ic_star_black_24dp);
             bf = false;
-        } else
-        {
+        } else {
             imagefavorite.setColorFilter(getApplicationContext().getResources().getColor(R.color.gray));
             imagefavorite.setImageResource(R.drawable.ic_star_border_black_24dp);
             bf = true;
@@ -111,8 +107,7 @@ public class Activity_Show extends AppCompatActivity
 
     }
 
-    private void findView()
-    {
+    private void findView() {
         textlike = findViewById(R.id.textlike);
         recyLike = findViewById(R.id.recyLike);
         imagefavorite = findViewById(R.id.imageFavorite);
@@ -121,14 +116,12 @@ public class Activity_Show extends AppCompatActivity
         textFree.setVisibility(View.GONE);
         textprice = findViewById(R.id.textPriceShow);
         textprice.setTypeface(typeface);
-        if (!freePrice.equals(""))
-        {
+        if (!freePrice.equals("")) {
             textFree.setVisibility(View.VISIBLE);
             textFree.setText(freePrice);
             textprice.setTextColor(Color.RED);
             textprice.setPaintFlags(textprice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        } else
-        {
+        } else {
             textFree.setVisibility(View.GONE);
         }
         textFree.setTypeface(typeface);
@@ -139,11 +132,9 @@ public class Activity_Show extends AppCompatActivity
         String rat = getIntent().getStringExtra(put.rating);
 
         int r = rat.length();
-        if (r == 1)
-        {
+        if (r == 1) {
             rat = rat + "." + "0";
-        } else
-        {
+        } else {
             rat = rat.substring(0, 3);
         }
 //        rat = rat.s);
@@ -161,45 +152,32 @@ public class Activity_Show extends AppCompatActivity
         textCountbasket.setText(preferences.getString("count", "0"));
         imagebacket = findViewById(R.id.imageBasket);
         comment = findViewById(R.id.cardViewComment);
-
-
         titleShow = findViewById(R.id.textTitleShow);
         titleShow.setTypeface(typeface);
         textColr = findViewById(R.id.textcolorShow);
         textColr.setTypeface(typeface);
-
         garanty = findViewById(R.id.textGarantyShow);
         garanty.setTypeface(typeface);
-
-
         nexttext = findViewById(R.id.textNextShow);
         nexttext.setTypeface(typeface);
-
         basket = findViewById(R.id.cardViewBasket);
-
         description = findViewById(R.id.textDescriptionShow);
         description.setTypeface(typeface);
-
-
         appBarLayout = findViewById(R.id.app_bar_layout);
         sliderLayout = findViewById(R.id.slider);
         imageback = findViewById(R.id.imageBack);
         imagebacket = findViewById(R.id.imageBasket);
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener()
-        {
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int i)
-            {
+            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
 
                 int scroll = -(i);
                 Log.i("collaps", scroll + "");
-                if (scroll >= 652)
-                {
+                if (scroll >= 652) {
                     imageback.setColorFilter(Color.rgb(255, 255, 255));
                     imagebacket.setColorFilter(Color.rgb(255, 255, 255));
                     textCountbasket.setTextColor(Color.rgb(255, 255, 255));
-                } else
-                {
+                } else {
                     imageback.setColorFilter(Color.rgb(189, 189, 189));
                     imagebacket.setColorFilter(Color.rgb(189, 189, 189));
                     textCountbasket.setTextColor(Color.rgb(189, 189, 189));
@@ -216,30 +194,24 @@ public class Activity_Show extends AppCompatActivity
         getLikeProduct();
     }
 
-    private void onClick()
-    {
+    private void onClick() {
         imageback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        imagefavorite.setOnClickListener(new View.OnClickListener()
-        {
+        imagefavorite.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                if (bf)
-                {
-                    if (!freePrice.equals(""))
-                    {
+            public void onClick(View v) {
+                if (bf) {
+                    if (!freePrice.equals("")) {
                         sqlite.insertFav(new ModelFav(Integer.parseInt(id), imageS, titleS, visit, freePrice, priceS, label));
                         imagefavorite.setImageResource(R.drawable.ic_star_black_24dp);
                         imagefavorite.setColorFilter(getApplicationContext().getResources().getColor(R.color.red));
                         Toast.makeText(context, "به لیست علاقه مندی ها اضافه شد", Toast.LENGTH_SHORT).show();
                         bf = false;
-                    } else
-                    {
+                    } else {
                         sqlite.insertFav(new ModelFav(Integer.parseInt(id), imageS, titleS, visit, priceS, priceS, label));
                         imagefavorite.setImageResource(R.drawable.ic_star_black_24dp);
                         imagefavorite.setColorFilter(getApplicationContext().getResources().getColor(R.color.red));
@@ -247,8 +219,7 @@ public class Activity_Show extends AppCompatActivity
                         bf = false;
                     }
 
-                } else
-                {
+                } else {
                     sqlite.deleteFav(Integer.parseInt(id));
                     imagefavorite.setImageResource(R.drawable.ic_star_border_black_24dp);
                     imagefavorite.setColorFilter(getApplicationContext().getResources().getColor(R.color.gray));
@@ -258,11 +229,9 @@ public class Activity_Show extends AppCompatActivity
 
             }
         });
-        cardPr.setOnClickListener(new View.OnClickListener()
-        {
+        cardPr.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Intent intent = new Intent(Activity_Show.this, Activity_properties.class);
                 intent.putExtra(put.id, id);
                 intent.putExtra(put.title, titleS);
@@ -270,30 +239,24 @@ public class Activity_Show extends AppCompatActivity
             }
         });
 
-        comment.setOnClickListener(new View.OnClickListener()
-        {
+        comment.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Intent intent = new Intent(Activity_Show.this, Activity_show_comment.class);
                 intent.putExtra(put.id, id);
                 startActivity(intent);
             }
         });
-        nexttext.setOnClickListener(new View.OnClickListener()
-        {
+        nexttext.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                if (b)
-                {
+            public void onClick(View v) {
+                if (b) {
                     description.setSingleLine(false);
                     nexttext.setText("بستن");
                     b = false;
 
 
-                } else
-                {
+                } else {
                     description.setSingleLine(true);
                     nexttext.setText("ادامه مطلب");
                     b = true;
@@ -301,21 +264,15 @@ public class Activity_Show extends AppCompatActivity
                 }
             }
         });
-        basket.setOnClickListener(new View.OnClickListener()
-        {
+        basket.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                if (session.equals("عضویت و ورود"))
-                {
+            public void onClick(View v) {
+                if (session.equals("عضویت و ورود")) {
                     Toast.makeText(Activity_Show.this, "شما وارد حساب کاربری خود نشده اید", Toast.LENGTH_SHORT).show();
-                } else
-                {
-                    if (!freePrice.equals(""))
-                    {
+                } else {
+                    if (!freePrice.equals("")) {
                         sendBasket(id, session, titleS, colorS, imageS, garantyS, freePrice);
-                    } else
-                    {
+                    } else {
                         sendBasket(id, session, titleS, colorS, imageS, garantyS, priceS);
                     }
 
@@ -328,19 +285,16 @@ public class Activity_Show extends AppCompatActivity
 
             }
         });
-        imagebacket.setOnClickListener(new View.OnClickListener()
-        {
+        imagebacket.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 startActivity(new Intent(Activity_Show.this, Activity_basket.class));
             }
         });
     }
 
 
-    public void installSliderLayout()
-    {
+    public void installSliderLayout() {
 //        Map<String, String> url_image = new TreeMap<>();
 //        url_image.put("image1", "http://uupload.ir/files/2zds_s4.png");
 //        url_image.put("image2", "http://uupload.ir/files/a7xa_s2.png");
@@ -366,26 +320,21 @@ public class Activity_Show extends AppCompatActivity
 
     }
 
-    private void getSilder(final String myId)
-    {
+    private void getSilder(final String myId) {
 
         final String url = Link.linkImage;
         final ProgressDialog progressDialog = new ProgressDialog(Activity_Show.this);
         progressDialog.show();
 
-        Response.Listener<String> listener = new Response.Listener<String>()
-        {
+        Response.Listener<String> listener = new Response.Listener<String>() {
             @Override
-            public void onResponse(String response)
-            {
+            public void onResponse(String response) {
 
 
-                try
-                {
+                try {
                     //Toast.makeText(Activity_Show.this, response.toString(), Toast.LENGTH_SHORT).show();
                     JSONArray jsonArray = new JSONArray(response.toString());
-                    for (int i = 0; i < jsonArray.length(); i++)
-                    {
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         String pics = jsonObject.getString("pics");
                         strings.add(pics);
@@ -402,8 +351,7 @@ public class Activity_Show extends AppCompatActivity
                         sliderLayout.setDuration(3000);
                         sliderLayout.addSlider(textSliderView);
                     }
-                } catch (Exception e)
-                {
+                } catch (Exception e) {
 
                 }
 
@@ -413,11 +361,9 @@ public class Activity_Show extends AppCompatActivity
         };
 
 
-        Response.ErrorListener errorListener = new Response.ErrorListener()
-        {
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error)
-            {
+            public void onErrorResponse(VolleyError error) {
 
                 //  Toast.makeText(Activity_Show.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
@@ -428,8 +374,7 @@ public class Activity_Show extends AppCompatActivity
         {
 
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError
-            {
+            protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> map = new HashMap<>();
                 map.put(put.id, myId);
                 return map;
@@ -447,13 +392,10 @@ public class Activity_Show extends AppCompatActivity
         recyLike.hasFixedSize();
 
 
-        if (cat.equals("0"))
-        {
+        if (cat.equals("0")) {
             recyLike.setVisibility(View.GONE);
             textlike.setText("محصول مشابهی یافت نشد");
-        }
-        else
-        {
+        } else {
             sendlikeproduct(cat);
 
         }
@@ -462,8 +404,7 @@ public class Activity_Show extends AppCompatActivity
     }
 
 
-    public void setIntent()
-    {
+    public void setIntent() {
 
         cat = getIntent().getStringExtra(put.cat);
         visit = getIntent().getStringExtra(put.visit);
@@ -481,16 +422,13 @@ public class Activity_Show extends AppCompatActivity
 
     }
 
-    private void sendBasket(final String id, final String email, final String title, final String color, final String image, final String garanty, final String price)
-    {
+    private void sendBasket(final String id, final String email, final String title, final String color, final String image, final String garanty, final String price) {
         String url = Link.linkBsket;
         final ProgressDialog progressDialog = new ProgressDialog(Activity_Show.this);
         progressDialog.show();
-        Response.Listener<String> listener = new Response.Listener<String>()
-        {
+        Response.Listener<String> listener = new Response.Listener<String>() {
             @Override
-            public void onResponse(String response)
-            {
+            public void onResponse(String response) {
                 Toast.makeText(Activity_Show.this, response.toString(), Toast.LENGTH_SHORT).show();
                 String count = textCountbasket.getText().toString();
                 int total = 0;
@@ -500,22 +438,18 @@ public class Activity_Show extends AppCompatActivity
 
             }
         };
-        Response.ErrorListener errorListener = new Response.ErrorListener()
-        {
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error)
-            {
+            public void onErrorResponse(VolleyError error) {
                 Toast.makeText(Activity_Show.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
 
 
             }
         };
-        StringRequest request = new StringRequest(Request.Method.POST, url, listener, errorListener)
-        {
+        StringRequest request = new StringRequest(Request.Method.POST, url, listener, errorListener) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError
-            {
+            protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> map = new HashMap<>();
                 map.put(put.id, id);
                 map.put(put.email, email);
@@ -530,6 +464,7 @@ public class Activity_Show extends AppCompatActivity
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
 
     }
+
     private void sendlikeproduct(final String cat) {
 
         String url = Link.linkLike;
@@ -577,6 +512,7 @@ public class Activity_Show extends AppCompatActivity
 
 
     }
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));

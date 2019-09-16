@@ -37,8 +37,7 @@ import myshop.sky.com.shop.Activity.Activity.Class.put;
 import myshop.sky.com.shop.Activity.Activity.Model.ModelItem;
 import myshop.sky.com.shop.R;
 
-public class Activity_Item extends AppCompatActivity
-{
+public class Activity_Item extends AppCompatActivity {
     RecyclerView recyclerView;
     AdapterItem adapterItem;
     List<ModelItem> modelItems = new ArrayList<>();
@@ -48,21 +47,21 @@ public class Activity_Item extends AppCompatActivity
     TextView texttitle;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activty_item);
         findView();
     }
-    private  void findView(){
+
+    private void findView() {
         imageback = findViewById(R.id.imageBack);
         texttitle = findViewById(R.id.textTitleActivity);
         texttitle.setText(getIntent().getStringExtra(put.title));
         cardFilter = findViewById(R.id.cardfilter);
-        id =getIntent().getStringExtra(put.id);
+        id = getIntent().getStringExtra(put.id);
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
         recyclerView = findViewById(R.id.recyitem);
-        adapterItem = new AdapterItem(getApplicationContext(),modelItems);
+        adapterItem = new AdapterItem(getApplicationContext(), modelItems);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(adapterItem);
         recyclerView.hasFixedSize();
@@ -70,12 +69,11 @@ public class Activity_Item extends AppCompatActivity
         getItem(id);
 
     }
-    private  void onClick(){
-        cardFilter.setOnClickListener(new View.OnClickListener()
-        {
+
+    private void onClick() {
+        cardFilter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 dialogFilter();
             }
         });
@@ -87,6 +85,7 @@ public class Activity_Item extends AppCompatActivity
         });
 
     }
+
     private void getItem(final String id) {
 
         String url = Link.linkGetItem;
@@ -118,24 +117,21 @@ public class Activity_Item extends AppCompatActivity
                 progressDialog.dismiss();
             }
         };
-        StringRequest request = new StringRequest(Request.Method.POST, url, listener, errorListener)
-        {
+        StringRequest request = new StringRequest(Request.Method.POST, url, listener, errorListener) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError
-            {
-                HashMap<String,String> map = new HashMap<>();
-                map.put(put.id,id);
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<>();
+                map.put(put.id, id);
                 return map;
             }
-        }
-                ;
+        };
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
-    private void dialogFilter()
-    {
+
+    private void dialogFilter() {
         final Dialog dialog = new Dialog(Activity_Item.this);
         dialog.setContentView(R.layout.dialog);
-        RadioButton rd1,rd2,rd3,rd4;
+        RadioButton rd1, rd2, rd3, rd4;
 
         rd1 = dialog.findViewById(R.id.rd1);
         rd2 = dialog.findViewById(R.id.rd2);
@@ -153,10 +149,10 @@ public class Activity_Item extends AppCompatActivity
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                       // getFilter(id,"visit");
+                        // getFilter(id,"visit");
                         dialog.cancel();
                     }
-                },100);
+                }, 100);
 
             }
         });
@@ -171,10 +167,10 @@ public class Activity_Item extends AppCompatActivity
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        getFilter(id,"sale");
+                        getFilter(id, "sale");
                         dialog.cancel();
                     }
-                },100);
+                }, 100);
             }
         });
         rd3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -187,10 +183,10 @@ public class Activity_Item extends AppCompatActivity
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        getFilter(id,"priceUp");
+                        getFilter(id, "priceUp");
                         dialog.cancel();
                     }
-                },100);
+                }, 100);
             }
         });
         rd4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -203,10 +199,10 @@ public class Activity_Item extends AppCompatActivity
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        getFilter(id,"priceDown");
+                        getFilter(id, "priceDown");
                         dialog.cancel();
                     }
-                },100);
+                }, 100);
             }
         });
         dialog.show();
@@ -220,8 +216,8 @@ public class Activity_Item extends AppCompatActivity
 
         dialog.getWindow().setLayout(width, LinearLayout.LayoutParams.WRAP_CONTENT);
     }
-    private void getFilter(final String id , final String param)
-    {
+
+    private void getFilter(final String id, final String param) {
         String url = Link.linkfilter;
 
         Response.Listener<String> listener = new Response.Listener<String>() {
@@ -244,13 +240,12 @@ public class Activity_Item extends AppCompatActivity
 
             }
         };
-        StringRequest request = new StringRequest(Request.Method.POST,url,listener,errorListener)
-        {
+        StringRequest request = new StringRequest(Request.Method.POST, url, listener, errorListener) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String,String> map = new HashMap<>();
-                map.put("idcat",id);
-                map.put("param",param);
+                HashMap<String, String> map = new HashMap<>();
+                map.put("idcat", id);
+                map.put("param", param);
                 return map;
             }
         };

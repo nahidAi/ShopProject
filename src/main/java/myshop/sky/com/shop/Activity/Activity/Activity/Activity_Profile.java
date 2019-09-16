@@ -52,15 +52,6 @@ public class Activity_Profile extends AppCompatActivity
                 finish();
             }
         });
-        btnprofile.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-
-                // startActivity(new Intent(Activity_Profile.this, Activity_EditeProfile.class));
-            }
-        });
         btnexite.setOnClickListener(new View.OnClickListener()
         {
             @Override

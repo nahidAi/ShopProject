@@ -30,7 +30,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Activity_Login extends AppCompatActivity {
     ImageView imgback;
-    TextView textTitle, register, textLogin;
+    TextView textTitle, register, textLogin,forgetpassword;
     CheckBox checkBox;
     EditText edpassword, edemail;
 
@@ -52,10 +52,17 @@ public class Activity_Login extends AppCompatActivity {
         edpassword = findViewById(R.id.edPasswordLogin);
         edemail = findViewById(R.id.edEmailLogin);
         textLogin = findViewById(R.id.textLogin);
+        forgetpassword = findViewById(R.id.textForgetPassword);
 
     }
 
     public void onClick() {
+        forgetpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Activity_Login.this,Activity_ForgetPassword.class));
+            }
+        });
         imgback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

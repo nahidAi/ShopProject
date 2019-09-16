@@ -48,6 +48,7 @@ import myshop.sky.com.shop.Activity.Activity.Activity.Activity_about;
 import myshop.sky.com.shop.Activity.Activity.Activity.Activity_basket;
 import myshop.sky.com.shop.Activity.Activity.Activity.Activity_category;
 import myshop.sky.com.shop.Activity.Activity.Activity.Activity_order;
+import myshop.sky.com.shop.Activity.Activity.Activity.Activity_showAllProduct_free;
 import myshop.sky.com.shop.Activity.Activity.Adapter.AdaperVisite;
 import myshop.sky.com.shop.Activity.Activity.Adapter.AdapterBanner;
 import myshop.sky.com.shop.Activity.Activity.Adapter.AdapterFree;
@@ -80,7 +81,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
     List<ModelBestSales> modelBestSales = new ArrayList<>();
     ImageView imageNav, imagebasketHome, imageSearch;
     DrawerLayout drawerLayout;
-    TextView txtLogin, textCount;
+    TextView txtLogin, textCount,textfreeAll,textOnlyAll,textVisitAll;
     CardView cardCategory;
     String session;
     CircleImageView circleImageView;
@@ -121,6 +122,9 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
     public void findView()
     {
+        textVisitAll = findViewById(R.id.textVisitAll);
+        textOnlyAll = findViewById(R.id.textOnlyAll);
+        textfreeAll = findViewById(R.id.textfreeAll);
         lnrcategory = findViewById(R.id.lnrCtegory);
         lnrabout = findViewById(R.id.lnrabout);
         lnrbuy = findViewById(R.id.lnrbuy);
@@ -152,6 +156,31 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
     public void onClick()
     {
+        textVisitAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,Activity_showAllProduct_free.class);
+                intent.putExtra("idText","3");
+                startActivity(intent);
+
+            }
+        });
+        textOnlyAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,Activity_showAllProduct_free.class);
+                intent.putExtra("idText","2");
+                startActivity(intent);
+            }
+        });
+        textfreeAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,Activity_showAllProduct_free.class);
+                intent.putExtra("idText","1");
+                startActivity(intent);
+            }
+        });
         lnrcategory.setOnClickListener(new View.OnClickListener()
         {
             @Override

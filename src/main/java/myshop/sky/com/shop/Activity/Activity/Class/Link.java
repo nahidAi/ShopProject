@@ -30,6 +30,11 @@ public class Link {
     public static final String linkGetOrder="http://newskylearn20.ir/getbuy.php";
     public static final String linkLike="http://newskylearn20.ir/likeproduct.php";
     public static final String linkfilter="http://newskylearn20.ir/filter.php";
+    public static final String sendEditForgetinfoUser="http://newskylearn20.ir/getregisterinfo.php";
+    public static final String linkForgetPass="http://newskylearn20.ir/forgetpassword.php";
+    public static final String linkFree="http://newskylearn20.ir/getallfreeprodauct.php";
+    public static final String linkOnly="http://newskylearn20.ir/getallonly.php";
+    public static final String linkVisit="http://newskylearn20.ir/getallvisit.php";
 
 
 

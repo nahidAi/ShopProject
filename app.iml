@@ -148,6 +148,5 @@
     <orderEntry type="library" name="Gradle: android.arch.core:common:1.1.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support.constraint:constraint-layout-solver:1.1.3@jar" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:runtime-1.1.0" level="project" />
-    <orderEntry type="library" name="Gradle: F__Android_SDK_Full_2016_17_06_git_ir_platforms_android_27_android_jar-android-27" level="project" />
   </component>
 </module>
