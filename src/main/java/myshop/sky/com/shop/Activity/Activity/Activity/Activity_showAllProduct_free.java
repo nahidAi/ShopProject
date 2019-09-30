@@ -20,8 +20,10 @@ import java.util.List;
 import myshop.sky.com.shop.Activity.Activity.Adapter.AdaperVisite;
 import myshop.sky.com.shop.Activity.Activity.Adapter.AdapterFree;
 import myshop.sky.com.shop.Activity.Activity.Adapter.AdapterOnly;
+import myshop.sky.com.shop.Activity.Activity.Adapter.AdapterSales;
 import myshop.sky.com.shop.Activity.Activity.Class.Link;
 import myshop.sky.com.shop.Activity.Activity.Class.MySingleton;
+import myshop.sky.com.shop.Activity.Activity.Model.ModelBestSales;
 import myshop.sky.com.shop.Activity.Activity.Model.ModelFree;
 import myshop.sky.com.shop.Activity.Activity.Model.ModelOnly;
 import myshop.sky.com.shop.Activity.Activity.Model.Modelvisit;
@@ -35,6 +37,8 @@ public class Activity_showAllProduct_free extends AppCompatActivity {
     List<ModelOnly> modelOnlies =new ArrayList<>();
     AdaperVisite adaperVisite;
     List<Modelvisit>modelvisitArrayList = new ArrayList<>();
+    AdapterSales adapterSales;
+    List<ModelBestSales>modelBestSalesList = new ArrayList<>();
     String idText;
 
     @Override
@@ -61,6 +65,12 @@ public class Activity_showAllProduct_free extends AppCompatActivity {
             recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
             recyclerView.setAdapter(adaperVisite);
             getVsitData();
+
+        }else if(idText.equals("4")){
+            adapterSales = new AdapterSales(getApplicationContext(),modelBestSalesList);
+            recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+            recyclerView.setAdapter(adapterSales);
+            getSaleData();
 
         }
 
@@ -151,6 +161,40 @@ public class Activity_showAllProduct_free extends AppCompatActivity {
                 for (int i = 0; i < modelvisits.length; i++) {
                     modelvisitArrayList.add(modelvisits[i]);
                     adaperVisite.notifyDataSetChanged();
+
+                }
+                //progressDialog.dismiss();
+
+            }
+        };
+
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(Activity_showAllProduct_free.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                // progressDialog.dismiss();
+            }
+        };
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, listener, errorListener);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+    }
+    private void getSaleData() {
+
+        String url = Link.linksale;
+//        final ProgressDialog progressDialog = new ProgressDialog(Home_Activity.this);
+//        progressDialog.show();
+
+        Response.Listener<JSONArray> listener = new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                Gson gson = new Gson();
+                ModelBestSales[] modelBestSales = gson.fromJson(response.toString(), ModelBestSales[].class);
+                for (int i = 0; i < modelBestSales.length; i++) {
+                    modelBestSalesList.add(modelBestSales[i]);
+                    adapterSales.notifyDataSetChanged();
 
                 }
                 //progressDialog.dismiss();

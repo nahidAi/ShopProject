@@ -5,7 +5,7 @@ public class Link {
     public static final String linkRegister = "http://newskylearn20.ir/register.php";
     public static final String linkLogin = "http://newskylearn20.ir/login.php";
     public static final String linkEdite = "http://newskylearn20.ir/profile.php";
-    public static final String linkcategory= "http://newskylearn20.ir/category.php";
+    public static final String linkcategory= "http://newskylearn20.ir/categoryclient.php";
     public static final String linkFreeProduct= "http://newskylearn20.ir/freeproduct.php";
     public static final String linkOnlyProduct= "http://newskylearn20.ir/getonly.php";
     public static final String linkVisitProduct= "http://newskylearn20.ir/getvisit.php";
@@ -35,6 +35,7 @@ public class Link {
     public static final String linkFree="http://newskylearn20.ir/getallfreeprodauct.php";
     public static final String linkOnly="http://newskylearn20.ir/getallonly.php";
     public static final String linkVisit="http://newskylearn20.ir/getallvisit.php";
+    public static final String linksale="http://newskylearn20.ir/getsaleall.php";
 
 
 

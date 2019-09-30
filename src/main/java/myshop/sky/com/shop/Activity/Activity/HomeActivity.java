@@ -81,7 +81,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
     List<ModelBestSales> modelBestSales = new ArrayList<>();
     ImageView imageNav, imagebasketHome, imageSearch;
     DrawerLayout drawerLayout;
-    TextView txtLogin, textCount,textfreeAll,textOnlyAll,textVisitAll;
+    TextView txtLogin, textCount,textfreeAll,textOnlyAll,textVisitAll,textSaleAll;
     CardView cardCategory;
     String session;
     CircleImageView circleImageView;
@@ -122,6 +122,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
     public void findView()
     {
+        textSaleAll = findViewById(R.id.textSaleAll);
         textVisitAll = findViewById(R.id.textVisitAll);
         textOnlyAll = findViewById(R.id.textOnlyAll);
         textfreeAll = findViewById(R.id.textfreeAll);
@@ -156,6 +157,15 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
     public void onClick()
     {
+        textSaleAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,Activity_showAllProduct_free.class);
+                intent.putExtra("idText","4");
+                startActivity(intent);
+
+            }
+        });
         textVisitAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

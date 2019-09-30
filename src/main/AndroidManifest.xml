@@ -14,11 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.Activity.HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activity.Activity.Activity.Activity_Banner" />
         <activity android:name=".Activity.Activity.Activity.Activity_Login" />
@@ -41,7 +37,14 @@
         <activity android:name=".Activity.Activity.Activity.Activity_order" />
         <activity android:name=".Activity.Activity.Activity.Activity_about" />
         <activity android:name=".Activity.Activity.Activity.Activity_ForgetPassword" />
-        <activity android:name=".Activity.Activity.Activity.Activity_showAllProduct_free"></activity>
+        <activity android:name=".Activity.Activity.Activity.Activity_showAllProduct_free" />
+        <activity android:name=".Activity.Activity.Activity.Splash_Screen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

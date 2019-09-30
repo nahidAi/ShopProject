@@ -10,20 +10,21 @@ tools:context="myshop.sky.com.shop.Activity.Activity.Activity.Activity_propertie
 
 <include layout="@layout/toolbar2"/>
 
-<android.support.v7.widget.CardView
+<!--<android.support.v7.widget.CardView
     app:cardBackgroundColor="@color/light"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/textTilePr"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        android:text="گوشی آیفون"
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</android.support.v7.widget.CardView>
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="گوشی آیفون"
+        android:textColor="@color/black"
+        android:textSize="16dp" />
+</android.support.v7.widget.CardView>-->
 
 <myshop.sky.com.shop.Activity.Activity.Class.TypeWriter
     android:lineSpacingExtra="10dp"

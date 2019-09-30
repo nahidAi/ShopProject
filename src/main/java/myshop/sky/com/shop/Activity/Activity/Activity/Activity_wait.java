@@ -25,8 +25,7 @@ import myshop.sky.com.shop.Activity.Activity.Class.MySingleton;
 import myshop.sky.com.shop.Activity.Activity.Class.put;
 import myshop.sky.com.shop.R;
 
-public class Activity_wait extends AppCompatActivity
-{
+public class Activity_wait extends AppCompatActivity {
     ProgressBar progressBar;
     String id;
     String image, title, visit, price, label, date, only, sale, color, garanty, description, cat, freePrice;
@@ -34,8 +33,7 @@ public class Activity_wait extends AppCompatActivity
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wait);
 
@@ -50,20 +48,15 @@ public class Activity_wait extends AppCompatActivity
 
     }
 
-    private void sendId(final String myId)
-    {
+    private void sendId(final String myId) {
         String url = Link.linkGetdata;
-        Response.Listener<String> listener = new Response.Listener<String>()
-        {
+        Response.Listener<String> listener = new Response.Listener<String>() {
             @Override
-            public void onResponse(String response)
-            {
+            public void onResponse(String response) {
 
-                try
-                {
+                try {
                     JSONArray jsonArray = new JSONArray(response);
-                    for (int i = 0; i < jsonArray.length(); i++)
-                    {
+                    for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject object = jsonArray.getJSONObject(i);
                         id = object.getString("id");
@@ -81,12 +74,11 @@ public class Activity_wait extends AppCompatActivity
                         description = object.getString("description");
                         ratingbar = object.getString("finalrating");
                         float f = Float.parseFloat(ratingbar);
-                        Toast.makeText(Activity_wait.this, String.valueOf(ratingbar), Toast.LENGTH_LONG).show();
+                        // Toast.makeText(Activity_wait.this, String.valueOf(ratingbar), Toast.LENGTH_LONG).show();
                         // Toast.makeText(Activity_wait.this, id, Toast.LENGTH_LONG).show();
 
                     }
-                } catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
 
                 }
@@ -100,11 +92,9 @@ public class Activity_wait extends AppCompatActivity
                 intent.putExtra(put.visit, visit);
                 intent.putExtra(put.price, price);
                 intent.putExtra(put.label, label);
-                if (!freePrice.equals(""))
-                {
+                if (!freePrice.equals("")) {
                     intent.putExtra(put.freeprice, freePrice);
-                } else
-                {
+                } else {
                     intent.putExtra(put.freeprice, "");
                 }
                 intent.putExtra(put.date, date);
@@ -120,21 +110,17 @@ public class Activity_wait extends AppCompatActivity
 
             }
         };
-        Response.ErrorListener errorListener = new Response.ErrorListener()
-        {
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error)
-            {
+            public void onErrorResponse(VolleyError error) {
                 Toast.makeText(Activity_wait.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
 
             }
         };
-        StringRequest request = new StringRequest(Request.Method.POST, url, listener, errorListener)
-        {
+        StringRequest request = new StringRequest(Request.Method.POST, url, listener, errorListener) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError
-            {
+            protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> map = new HashMap<>();
                 map.put(put.id, myId);
                 return map;
